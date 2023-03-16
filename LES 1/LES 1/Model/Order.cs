@@ -28,64 +28,60 @@ namespace LES_1.Model
         {
 
         }
-        public decimal calculatePrice(Boolean isStudent, Boolean isWeekend, Boolean isPremium)
+        public decimal calculatePrice(Boolean IsWeekend)
         {
-            int numTickets = Tickets.Count;
-            decimal standardPrice = 10.00m;
-            decimal premiumPrice = standardPrice + (isStudent ? 2.00m : 3.00m);
-            int numFreeTickets = (isWeekend && !isStudent) ? 0 : (numTickets / 2);
-            int numPaidTickets = numTickets - numFreeTickets;
-            decimal totalPrice;
+            int NormalTicketPrice = 10;
+            decimal Totalprice = 0;
+            int PremiumTicketPrice;
+            int paidTicketCount = 0;
+            int Ticketcount;
 
-            if (isStudent || !isWeekend)
+            if (this.isStudentOrder)
             {
-                if (isPremium)
-                {
-                    totalPrice = 0.0m;
-                    int numPremiumTickets = 0;
-                    int numStandardTickets = 0;
-
-                    foreach (Movieticket ticket in Tickets)
-                    {
-                        if (ticket.isPremiumTicket())
-                        {
-                            totalPrice += premiumPrice;
-                            numPremiumTickets++;
-                        }
-                        else
-                        {
-                            totalPrice += standardPrice;
-                            numStandardTickets++;
-                        }
-                    }
-
-                    int numFreePremiumTickets = (numPremiumTickets + numStandardTickets) / 2 - numPremiumTickets;
-                    int numFreeStandardTickets = numFreeTickets - numFreePremiumTickets;
-
-                    totalPrice -= (numFreePremiumTickets * premiumPrice) + (numFreeStandardTickets * standardPrice);
-                }
-                else
-                {
-                    totalPrice = (numPaidTickets * standardPrice) + (numFreeTickets * standardPrice);
-                }
+                PremiumTicketPrice = 12;
             }
             else
             {
-                decimal groupDiscount = (numTickets >= 6) ? 0.10m : 0.00m;
-                decimal discountedPrice = standardPrice * (1 - groupDiscount);
-                if (isPremium)
+                PremiumTicketPrice = 13;
+            }
+
+            // Check if there are free tickets
+            if (this.isStudentOrder)
+            {
+                int ticketCount = Tickets.Count;
+                int freeTicketCount = (ticketCount + 1) / 2; // Divide by 2 and round up
+                 paidTicketCount = ticketCount - freeTicketCount;
+            }
+
+            if (!this.isStudentOrder || !IsWeekend)
+            {
+                int ticketCount = Tickets.Count;
+                int freeTicketCount = (ticketCount + 1) / 2; // Divide by 2 and round up
+                 paidTicketCount = ticketCount - freeTicketCount;
+            }
+
+            // Loop through the number of tickets and check if they are premium or not
+            for (int i = 0; i < paidTicketCount; i++)
+            {
+                if (Tickets[i].isPremiumTicket())
                 {
-                    totalPrice = (numPaidTickets * premiumPrice) + (numFreeTickets * discountedPrice);
+                    Totalprice += PremiumTicketPrice;
                 }
                 else
                 {
-                    totalPrice = (numPaidTickets * discountedPrice) + (numFreeTickets * discountedPrice);
+                    Totalprice += NormalTicketPrice;
                 }
             }
 
-            return totalPrice;
+            // Check if non-students are buying tickets on the weekend and give a 10% discount if true
+            if (IsWeekend || !this.isStudentOrder)
+            {
+                Totalprice = Totalprice * 0.9m;
+            }
+
+            return Totalprice;
         }
-    
+
         public void Export(TicketExportFormat format, String fileName)
         {
             string output = "";
