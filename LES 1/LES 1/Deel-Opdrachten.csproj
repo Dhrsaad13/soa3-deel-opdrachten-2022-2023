@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>LES_1</RootNamespace>
+    <RootNamespace>Deel-Opdrachten</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
