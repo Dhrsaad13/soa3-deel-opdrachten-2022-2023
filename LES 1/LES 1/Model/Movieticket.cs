@@ -8,18 +8,25 @@ namespace LES_1
 {
     class Movieticket
     {
-        public Movieticket(int rowNr, int seatNr, bool isPremiun)
+        public Movieticket(int rowNr, int seatNr, bool isPremium)
         {
             this.rowNr = rowNr;
             this.seatNr = seatNr;
-            this.isPremiun = isPremiun;
+            this.isPremium = isPremium;
         }
 
         private int rowNr { get; set; }
         private int seatNr { get; set; }
-        private Boolean isPremiun { get; set; }
+        private Boolean isPremium { get; set; }
        public Boolean isPremiumTicket() {
-            return false;
+            if (isPremium)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public String toString() { return "true"; }
     }
