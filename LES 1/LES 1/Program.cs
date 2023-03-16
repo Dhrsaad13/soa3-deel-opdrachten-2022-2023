@@ -6,6 +6,7 @@ namespace LES_1
     {
         static void Main(string[] args)
         {
+            // Program will start here
         }
     }
 }
