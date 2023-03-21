@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LES_1
+namespace Deelopdrachten
 {
     class Program
     {
