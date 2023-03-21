@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LES_1.Model;
+using NUnit.Framework;
 
-namespace Deel-Opdrachten.Tests
+namespace Deelopdrachten.Tests
 {
     [TestFixture]
-public class Tests
+public class MovieTicketTest
 {
     [Test]
     public void TestCalculatePrice_Weekend_NonStudentOrder()

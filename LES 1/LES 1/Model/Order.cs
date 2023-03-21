@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace LES_1.Model
+namespace Deelopdrachten
 {
     class Order
     {
