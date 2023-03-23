@@ -9,29 +9,25 @@ namespace Deelopdrachten
 {
     class Movieticket
     {
-        public Movieticket(int rowNr, int seatNr, bool isPremium)
+        public Movieticket(int rowNr, int seatNr, bool isPremium = false)
         {
             this.rowNr = rowNr;
             this.seatNr = seatNr;
             this.isPremium = isPremium;
         }
+
         private int rowNr { get; set; }
         private int seatNr { get; set; }
-        private Boolean isPremium { get; set; }
-        public Boolean isPremiumTicket()
+        private bool isPremium { get; set; }
+
+        public bool isPremiumTicket()
         {
-            if (isPremium)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return isPremium;
         }
-        public String toString() { return "true"; }
+
+        public override string ToString()
+        {
+            return "true";
+        }
     }
 }
-
-
-      
